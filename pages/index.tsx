@@ -2,14 +2,18 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, { FC, useEffect, useState } from 'react';
 
+interface ResourceObjectType {
+  context: { alt: string; caption: string };
+  public_id: string;
+}
 export default function Home() {
-  const [imageIds, setImageIds] = useState<string[]>();
+  const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
 
   const loadImages = async () => {
     try {
       const res = await fetch('/api/images');
       const data = await res.json();
-      setImageIds(data);
+      setResourceObjectsArr(data);
     } catch (err) {
       console.error('Error:', err);
     }
@@ -29,16 +33,22 @@ export default function Home() {
       <main>
         <h1>Image Viewer App - Gallery</h1>
         <div className="gallery">
-          {imageIds ? (
-            imageIds.map((imageId: string, index: number) => (
-              <Image
-                key={index}
-                src={`http://res.cloudinary.com/aarncloud/image/upload/v1647660835/${imageId}.jpg`}
-                width="300"
-                height="300"
-                alt="gallery image"
-              />
-            ))
+          {resourceObjectsArr ? (
+            resourceObjectsArr.map(
+              (resourceObject: ResourceObjectType, index: number) => (
+                <div key={index}>
+                  <Image
+                    key={index}
+                    src={`http://res.cloudinary.com/aarncloud/image/upload/v1647660835/${resourceObject.public_id}.jpg`}
+                    width="300"
+                    height="300"
+                    alt="gallery image"
+                  />
+                  <p>{resourceObject.context.alt}</p>
+                  <p>{resourceObject.context.caption}</p>
+                </div>
+              )
+            )
           ) : (
             <p>No images</p>
           )}

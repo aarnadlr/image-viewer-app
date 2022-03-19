@@ -8,9 +8,21 @@ export default function Upload() {
   const [successMsg, setSuccessMsg] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === 'title') {
+      setTitle(value);
+    }
+    if (name === 'description') {
+      setDescription(value);
+    }
+  };
+
   // Triggers when a file is selected
   const handleFileInputChange = (e: React.ChangeEvent) => {
-
     const target = e.target as HTMLInputElement;
     const file = target.files![0];
     // const file = e.target.files[0];
@@ -21,19 +33,18 @@ export default function Upload() {
   };
 
   const previewFile = (file: File) => {
-
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(file);
-    
+
     reader.onloadend = () => {
       setPreviewSource(reader.result as string);
-      console.log('reader.result:',reader.result)
+      console.log('reader.result:', reader.result);
     };
   };
 
   const handleSubmitFile = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('submit 1:',)
+    console.log('submit 1:');
 
     if (!selectedFile) return;
 
@@ -52,7 +63,7 @@ export default function Upload() {
   };
 
   const uploadImage = async (base64EncodedImage: string) => {
-    console.log('submit 2:',)
+    console.log('submit 2:');
     try {
       await fetch('/api/upload', {
         method: 'POST',
@@ -75,6 +86,11 @@ export default function Upload() {
       <Alert msg={successMsg} type="success" />
 
       <form onSubmit={handleSubmitFile} className="form">
+        
+        <label htmlFor="fileInput" className="form-label">
+          File
+        </label>
+        <br />
         <input
           id="fileInput"
           type="file"
@@ -83,6 +99,22 @@ export default function Upload() {
           value={fileInputState}
           className="form-input"
         />
+
+        <br />
+        <br />
+
+        <label htmlFor="title">Title</label>
+        <br />
+        <input id="title" name="title" value={title} onChange={handleTextInputChange} type="text" />
+        <br />
+
+        <label htmlFor="description">Description</label>
+        <br />
+        <input id="description" name="description" value={description} onChange={handleTextInputChange} type="text" />
+        
+        <br />
+        <br />
+
         <button className="btn" type="submit">
           Submit
         </button>
@@ -93,7 +125,6 @@ export default function Upload() {
         // eslint-disable-next-line
         <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
       )}
-
     </div>
   );
 }
