@@ -1,7 +1,7 @@
 import Head from 'next/head';
-// import Image from 'next/image';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { Image } from 'cloudinary-react';
+// import { Image } from 'cloudinary-react';
 
 export default function Home() {
   const [imageIds, setImageIds] = useState();
@@ -30,16 +30,19 @@ export default function Home() {
       <main>
         <h1>Image Viewer App - Gallery</h1>
         <div className="gallery">
-          {imageIds &&
+          {imageIds ? (
             imageIds.map((imageId: string, index: number) => (
-                <Image
-                  key={index}
-                  cloudName={'aarncloud'}
-                  publicId={imageId}
-                  width="300"
-                  crop="scale"
-                />
-            ))}
+              <Image
+                key={index}
+                src={`http://res.cloudinary.com/aarncloud/image/upload/v1647660835/${imageId}.jpg`}
+                width="300"
+                height="300"
+                alt="gallery image"
+              />
+            ))
+          ) : (
+            <p>No images</p>
+          )}
         </div>
       </main>
 
