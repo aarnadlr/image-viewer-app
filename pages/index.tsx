@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-// import { Image } from 'cloudinary-react';
+import React, { FC, useEffect, useState } from 'react';
 
 export default function Home() {
-  const [imageIds, setImageIds] = useState();
+  const [imageIds, setImageIds] = useState<string[]>();
 
   const loadImages = async () => {
     try {

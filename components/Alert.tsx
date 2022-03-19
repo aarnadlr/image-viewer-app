@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Alert({ msg, type }) {
+interface Props {
+    msg: string;
+    type: string;
+}
+
+export default function Alert({ msg, type }: Props) {
     const [show, setShow] = useState(false);
     useEffect(() => {
         if (msg) {

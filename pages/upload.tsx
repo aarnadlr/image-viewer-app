@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import Alert from '../components/Alert';
-
+import Image from 'next/image';
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState<File>();
   const [successMsg, setSuccessMsg] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
   // Triggers when a file is selected
   const handleFileInputChange = (e: React.ChangeEvent) => {
 
-    const file = e.target.files[0];
+    const target = e.target as HTMLInputElement;
+    const file = target.files![0];
+    // const file = e.target.files[0];
 
     previewFile(file);
     setSelectedFile(file);
-    setFileInputState(e.target.value);
+    setFileInputState(target.value);
   };
 
-  const previewFile = (file) => {
+  const previewFile = (file: File) => {
 
-    const reader = new FileReader();
+    const reader: FileReader = new FileReader();
     reader.readAsDataURL(file);
     
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource(reader.result as string);
+      console.log('reader.result:',reader.result)
     };
   };
 
@@ -39,7 +42,7 @@ export default function Upload() {
     reader.readAsDataURL(selectedFile);
 
     reader.onloadend = () => {
-      uploadImage(reader.result);
+      uploadImage(reader.result as string);
     };
 
     reader.onerror = () => {
@@ -87,6 +90,7 @@ export default function Upload() {
 
       {/* show preview image */}
       {previewSource && (
+        // eslint-disable-next-line
         <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
       )}
 
