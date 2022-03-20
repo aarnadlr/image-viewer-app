@@ -37,14 +37,14 @@ export default function Upload() {
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
+      // reader.result is a DataURL/base64EncodedImage string ie `data:image/jpeg;base64,/9j/4AA..`
       setPreviewSource(reader.result as string);
-      console.log('reader.result:', reader.result);
+      
     };
   };
 
   const handleSubmitFile = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('submit 1:');
 
     if (!selectedFile) return;
 
@@ -53,7 +53,7 @@ export default function Upload() {
     reader.readAsDataURL(selectedFile);
 
     reader.onloadend = () => {
-      uploadImage(reader.result as string);
+      uploadImageAndMetadata(reader.result as string, title, description);
     };
 
     reader.onerror = () => {
@@ -62,20 +62,19 @@ export default function Upload() {
     };
   };
 
-  const uploadImage = async (base64EncodedImage: string) => {
-    console.log('submit 2:');
+  const uploadImageAndMetadata = async (base64EncodedImage: string, title: string, description: string) => {
     try {
       await fetch('/api/upload', {
         method: 'POST',
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({ data: base64EncodedImage, title, description }),
         headers: { 'Content-Type': 'application/json' },
       });
       setFileInputState('');
       setPreviewSource('');
-      setSuccessMsg('Image uploaded successfully');
+      setSuccessMsg('Image and data uploaded successfully.');
     } catch (err) {
       console.error(err);
-      setErrMsg('Something went wrong!');
+      setErrMsg('Something went wrong.');
     }
   };
   return (
