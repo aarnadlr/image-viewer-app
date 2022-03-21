@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Alert from '../components/Alert';
-import Image from 'next/image';
+import { Input } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
+import { ArrowUpIcon } from '@chakra-ui/icons';
+
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
@@ -25,8 +28,7 @@ export default function Upload() {
   const handleFileInputChange = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     const file = target.files![0];
-    // const file = e.target.files[0];
-
+    
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(target.value);
@@ -37,9 +39,7 @@ export default function Upload() {
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
-      // reader.result is a DataURL/base64EncodedImage string ie `data:image/jpeg;base64,/9j/4AA..`
       setPreviewSource(reader.result as string);
-      
     };
   };
 
@@ -62,7 +62,11 @@ export default function Upload() {
     };
   };
 
-  const uploadImageAndMetadata = async (base64EncodedImage: string, title: string, description: string) => {
+  const uploadImageAndMetadata = async (
+    base64EncodedImage: string,
+    title: string,
+    description: string
+  ) => {
     try {
       await fetch('/api/upload', {
         method: 'POST',
@@ -85,18 +89,17 @@ export default function Upload() {
       <Alert msg={successMsg} type="success" />
 
       <form onSubmit={handleSubmitFile} className="form">
-        
         <label htmlFor="fileInput" className="form-label">
           File
         </label>
         <br />
         <input
+          className="custom-file-input"
           id="fileInput"
           type="file"
           name="image"
           onChange={handleFileInputChange}
           value={fileInputState}
-          className="form-input"
         />
 
         <br />
@@ -104,19 +107,41 @@ export default function Upload() {
 
         <label htmlFor="title">Title</label>
         <br />
-        <input id="title" name="title" value={title} onChange={handleTextInputChange} type="text" />
+        <Input
+          id="title"
+          name="title"
+          value={title}
+          onChange={handleTextInputChange}
+          placeholder="Add a title here"
+          size="lg"
+          width="320px"
+        />
+        <br />
         <br />
 
         <label htmlFor="description">Description</label>
         <br />
-        <input id="description" name="description" value={description} onChange={handleTextInputChange} type="text" />
-        
+        <Input
+          id="description"
+          name="description"
+          value={description}
+          onChange={handleTextInputChange}
+          placeholder="Add a description here"
+          size="lg"
+          width="320px"
+        />
+
         <br />
         <br />
 
-        <button className="btn" type="submit">
-          Submit
-        </button>
+        <Button
+          type="submit"
+          leftIcon={<ArrowUpIcon />}
+          width="320px"
+          margin="1rem 0"
+        >
+          Upload
+        </Button>
       </form>
 
       {/* show preview image */}

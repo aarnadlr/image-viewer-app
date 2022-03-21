@@ -1,6 +1,6 @@
 import ImageCard from '@/components/ImageCard';
 import Head from 'next/head';
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
 interface ResourceObjectInterface {
