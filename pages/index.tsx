@@ -1,11 +1,17 @@
+import ImageCard from '@/components/ImageCard';
 import Head from 'next/head';
-import Image from 'next/image';
 import React, { FC, useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 
-interface ResourceObjectType {
+interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
 }
+
+const FlexParent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 export default function Home() {
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
 
@@ -32,29 +38,20 @@ export default function Home() {
 
       <main>
         <h1>Image Viewer App - Gallery</h1>
-        <div className="gallery">
+
+        <FlexParent className="gallery">
           {resourceObjectsArr ? (
             resourceObjectsArr.map(
-              (resourceObject: ResourceObjectType, index: number) => (
-                <div key={index}>
-                  <Image
-                    key={index}
-                    src={`http://res.cloudinary.com/aarncloud/image/upload/v1647660835/${resourceObject.public_id}.jpg`}
-                    width="300"
-                    height="300"
-                    alt="gallery image"
-                  />
-                  <p>Title:{resourceObject.context.title}</p>
-                  <p>Descr:{resourceObject.context.description}</p>
-                </div>
-              )
+              (resourceObject: ResourceObjectInterface, index: number) => {
+                return (
+                  <ImageCard key={index} resourceObject={resourceObject} />
+                );
+              }
             )
           ) : (
             <p>No images</p>
-          )}
-        </div>
+          )}</FlexParent>
       </main>
-
       <footer></footer>
     </div>
   );
