@@ -2,7 +2,7 @@ import ImageCard from '@/components/ImageCard';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-
+// import { useRouter } from 'next/router';
 interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
@@ -13,6 +13,7 @@ const FlexParent = styled.div`
   flex-wrap: wrap;
 `;
 export default function Home() {
+  // const router = useRouter();
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
 
   const loadImages = async () => {
@@ -37,8 +38,6 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Image Viewer App - Gallery</h1>
-
         <FlexParent className="gallery">
           {resourceObjectsArr ? (
             resourceObjectsArr.map(
