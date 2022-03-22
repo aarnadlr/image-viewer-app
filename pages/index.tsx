@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <>
       <Head>
         <title>Image Viewer App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -51,7 +51,8 @@ export default function Home() {
             <p>No images</p>
           )}</FlexParent>
       </main>
+      
       <footer></footer>
-    </div>
+    </>
   );
 }

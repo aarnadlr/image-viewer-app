@@ -4,9 +4,9 @@ interface Props {
 }
 export default function Layout({ children }: Props) {
   return (
-    <>
+    <div style={{padding:'16px'}}>
       <Header />
       <main>{children}</main>
-    </>
+    </div>
   );
 }
