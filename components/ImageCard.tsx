@@ -15,25 +15,25 @@ type Props = {
 };
 
 const Container = styled.div`
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin: 0 0.5rem 0.5rem 0;
+  margin: 0 1rem 2rem 0;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 250px;
   flex-wrap: wrap;
   transition: all 0.2s ease-in-out;
-  border-radius: 0.5rem;
-  &:hover {
-    border: 1px solid blue;
-  }
 `;
 
 const Title = styled.h3`
-  margin: 0.75rem 0 0 0;
+  margin: 0;
   padding: 0;
-  font-size: 1.2rem;
+  font-size: 18px;
   font-weight: bold;
+`;
+
+const TextContainer = styled.div`
+  margin: 0.5rem 0 0 0;
+  padding: 0 .5rem .5rem .5rem;
+
 `;
 
 const downloadImage = async (url: string, title: string) => {
@@ -56,6 +56,7 @@ export default function ImageCard({
     public_id,
   },
 }: Props) {
+
   const handleDownloadClick = () => {
     const url = `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`;
     downloadImage(url, title);
@@ -63,27 +64,37 @@ export default function ImageCard({
 
   return (
     <Container>
-      <Image
-        src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}
-        width="300"
-        height="300"
-        alt="gallery image"
-        priority
+        <Image
+          src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}
+          width="250"
+          height="250"
+          alt="gallery image"
+          priority
+          className='card-img'
+          // layout="responsive"
+          // layout="fill"
+          objectFit="cover"
       />
-      <Title>{title}</Title>
-      <p>{description}</p>
+      
+      <TextContainer>
+        
+        <Title>{title}</Title>
+        <p>{description}</p>
+  
+        <Button
+          leftIcon={<DownloadIcon />}
+          onClick={handleDownloadClick}
+          size="xs"
+          colorScheme="gray"
+          variant="outline"
+          width='100px'
+          margin='1rem 0 0 0'
+        >
+          Download
+        </Button>
+      </TextContainer>
 
-      <Button
-        leftIcon={<DownloadIcon />}
-        onClick={handleDownloadClick}
-        size="xs"
-        colorScheme="gray"
-        variant="outline"
-        width='100px'
-        margin='2rem 0 0 0'
-      >
-        Download
-      </Button>
+
     </Container>
   );
 }

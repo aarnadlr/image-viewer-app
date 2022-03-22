@@ -35,3 +35,8 @@ body {
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+
+img.card-img{
+  filter: brightness(95%);
+  border-radius: 1rem;
+}
