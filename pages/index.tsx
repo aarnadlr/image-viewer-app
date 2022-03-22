@@ -16,6 +16,10 @@ export default function Home() {
   // const router = useRouter();
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
 
+  // const reloadPage = () => {
+  //   router.reload(window.location.pathname)
+  // }
+
   const loadImages = async () => {
     try {
       const res = await fetch('/api/images');

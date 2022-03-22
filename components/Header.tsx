@@ -23,25 +23,6 @@ export function Header({}: Props) {
 
         <UploadModal />
 
-
-
-          {/* {router.pathname === '/' ? (
-            <Button
-              onClick={() => router.push('/upload')}
-              size="lg"
-              colorScheme={'purple'}
-            >
-              Upload
-            </Button>
-          ) : (
-            <Button
-              onClick={() => router.push('/')}
-              size="lg"
-              colorScheme={'purple'}
-            >
-              Back to Home
-            </Button>
-          )} */}
         </Box>
       </Flex>
     </nav>
