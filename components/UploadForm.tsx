@@ -8,9 +8,9 @@ import { useRouter } from 'next/router';
 interface Props {
   // successResponse: boolean | null;
   // setSuccessResponse: (successResponse: boolean) => void;
-  onClose: () => void;
+  onClose?: () => void;
   loadImages: () => void;
-  resourceObjectsArr: []|null;
+  resourceObjectsArr?: []|null;
 }
 export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
   const [fileInputState, setFileInputState] = useState('');
@@ -75,7 +75,7 @@ export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
     };
   };
 
-  const reload = router.reload as any;
+  const reload = router?.reload as any;
 
   const uploadImageAndMetadata = async (
     base64EncodedImage: string,
@@ -108,13 +108,16 @@ export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
   return (
     <div>
 
-      <form onSubmit={handleSubmitFile} className="form">
+      <form data-testid='form' aria-label='form' onSubmit={handleSubmitFile} className="form">
         
-        <FormLabel htmlFor="fileInput" className="form-label">
+        <label data-testid='file-label' aria-label='file-label' htmlFor="fileInput" className="form-label">
           File
-        </FormLabel>
+        </label>
+
+        <br />
 
         <input
+          aria-label='file-input'
           className="custom-file-input"
           id="fileInput"
           type="file"
@@ -125,8 +128,9 @@ export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
           required
         />
 
+        <br />
 
-        <FormLabel htmlFor="title">Title</FormLabel>
+        <label data-testid='title-label' htmlFor="title">Title</label>
 
         <Input
           id="title"
@@ -139,7 +143,7 @@ export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
           required
         />
 
-        <FormLabel htmlFor="description">Description</FormLabel>
+        <label data-testid='description-label'  htmlFor="description">Description</label>
         <Input
           id="description"
           name="description"

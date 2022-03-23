@@ -78,10 +78,11 @@ export default function ImageCard({
       
       <TextContainer>
         
-        <Title>{title}</Title>
-        <p>{description}</p>
+        <Title data-testid="title">{title}</Title>
+        <p data-testid="description">{description}</p>
   
         <Button
+          data-testid="download-button"
           leftIcon={<DownloadIcon />}
           onClick={handleDownloadClick}
           size="xs"
