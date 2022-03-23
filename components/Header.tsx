@@ -1,16 +1,20 @@
 import React from 'react';
 import { Flex, Spacer, Box, Button, Heading } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { UploadModal } from '../components/UploadModal';
 
-type Props = {};
+type Props = {
+  loadImages: () => void;
+  resourceObjectsArr: []|null;
+};
 
-export function Header({}: Props) {
-  const router = useRouter();
+export function Header({loadImages, resourceObjectsArr
+}: Props) {
+  // const router = useRouter();
 
   return (
     <nav style={{marginBottom: '40px'}}>
-      {console.log('router:', router)}
+      {/* {console.logß('router:', router)} */}
       <Flex>
         <Box>
           <Heading size="lg" color={'purple.500'}>
@@ -21,7 +25,7 @@ export function Header({}: Props) {
 
         <Box display="flex" alignItems="center">
 
-        <UploadModal />
+        <UploadModal resourceObjectsArr={resourceObjectsArr} loadImages={loadImages} />
 
         </Box>
       </Flex>

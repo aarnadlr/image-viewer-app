@@ -6,21 +6,24 @@ import { ArrowUpIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 
 interface Props {
-  successResponse: boolean | null;
-  setSuccessResponse: (successResponse: boolean) => void;
+  // successResponse: boolean | null;
+  // setSuccessResponse: (successResponse: boolean) => void;
   onClose: () => void;
+  loadImages: () => void;
+  resourceObjectsArr: []|null;
 }
-export function UploadForm({successResponse, setSuccessResponse, onClose}:Props) {
+export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [successMsg, setSuccessMsg] = useState('');
+  // const [successMsg, setSuccessMsg] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === 'title') {
@@ -53,7 +56,8 @@ export function UploadForm({successResponse, setSuccessResponse, onClose}:Props)
   const handleSubmitFile = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setisSubmitting(true);
+    // setisSubmitting(true);
+    setIsLoading(true);
 
     if (!selectedFile) return;
 
@@ -79,28 +83,30 @@ export function UploadForm({successResponse, setSuccessResponse, onClose}:Props)
     description: string
   ) => {
     try {
-      await fetch('/api/upload', {
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: JSON.stringify({ data: base64EncodedImage, title, description }),
         headers: { 'Content-Type': 'application/json' },
       });
-      setFileInputState('');
-      setPreviewSource('');
-      setSuccessMsg('Image and data uploaded successfully.');
-      setisSubmitting(false);
-      setSuccessResponse(true);
-      onClose();
-      reload(window.location.pathname);
+      console.log('response:', response);
+      if (response.ok) {
+        setFileInputState('');
+        setPreviewSource('');
+        loadImages();
+
+        setTimeout(() => {
+          reload(window.location.pathname)
+        }, 2000);
+      }
+
     } catch (err) {
       console.error(err);
       setErrMsg('Something went wrong.');
     }
   };
+
   return (
     <div>
-
-      {/* <Alert msg={errMsg} type="danger" />
-      <Alert msg={successMsg} type="success" /> */}
 
       <form onSubmit={handleSubmitFile} className="form">
         
@@ -115,7 +121,8 @@ export function UploadForm({successResponse, setSuccessResponse, onClose}:Props)
           name="image"
           onChange={handleFileInputChange}
           value={fileInputState}
-          style={{margin:"0 0 2rem 0"}}
+          style={{ margin: "0 0 2rem 0" }}
+          required
         />
 
 
@@ -128,8 +135,8 @@ export function UploadForm({successResponse, setSuccessResponse, onClose}:Props)
           onChange={handleTextInputChange}
           placeholder="Add a title here"
           size="lg"
-          // ref={ref}
-          style={{margin:"0 0 1rem 0"}}
+          style={{ margin: "0 0 1rem 0" }}
+          required
         />
 
         <FormLabel htmlFor="description">Description</FormLabel>
@@ -140,17 +147,19 @@ export function UploadForm({successResponse, setSuccessResponse, onClose}:Props)
           onChange={handleTextInputChange}
           placeholder="Add a description here"
           size="lg"
-          style={{margin:"0 0 1rem 0"}}
+          style={{ margin: "0 0 1rem 0" }}
+          required
         />
 
         <Button
           type="submit"
           leftIcon={<ArrowUpIcon />}
-          // width="320px"
           margin="1rem 0"
           colorScheme={'purple'}
           size="lg"
           isFullWidth
+          isLoading={isLoading}
+          loadingText='Uploading...'
         >
           Upload
         </Button>

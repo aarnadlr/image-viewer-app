@@ -2,7 +2,8 @@ import ImageCard from '@/components/ImageCard';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-// import { useRouter } from 'next/router';
+import { Header } from '../components/Header';
+
 interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
@@ -12,24 +13,22 @@ const FlexParent = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-export default function Home() {
-  // const router = useRouter();
-  const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
 
-  // const reloadPage = () => {
-  //   router.reload(window.location.pathname)
-  // }
+export default function Home() {
+  const [resourceObjectsArr, setResourceObjectsArr] = useState<[]|null>(null);
 
   const loadImages = async () => {
     try {
       const res = await fetch('/api/images');
       const data = await res.json();
       setResourceObjectsArr(data);
+
     } catch (err) {
       console.error('Error:', err);
     }
   };
 
+  // fetch images on mount
   useEffect(() => {
     loadImages();
   }, []);
@@ -42,6 +41,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <Header resourceObjectsArr={resourceObjectsArr} loadImages={loadImages} />
         <FlexParent className="gallery">
           {resourceObjectsArr ? (
             resourceObjectsArr.map(
@@ -53,10 +53,10 @@ export default function Home() {
             )
           ) : (
             <p>No images</p>
-          )}</FlexParent>
+          )}
+        </FlexParent>
       </main>
       
-      <footer></footer>
     </>
   );
 }

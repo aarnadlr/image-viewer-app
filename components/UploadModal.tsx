@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -15,12 +15,14 @@ import {
 } from '@chakra-ui/react';
 import { UploadForm } from './UploadForm';
 
-export function UploadModal() {
+type Props = {
+  loadImages: () => void;
+  resourceObjectsArr: []|null;
+};
+
+export function UploadModal({ loadImages, resourceObjectsArr }: Props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // const initialRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [successResponse, setSuccessResponse] = useState(null);
 
   return (
     <>
@@ -58,7 +60,7 @@ export function UploadModal() {
           </ModalBody> */}
 
           
-            <UploadForm onClose={onClose} successResponse={successResponse} setSuccessResponse={ setSuccessResponse}/>
+            <UploadForm loadImages={loadImages} onClose={onClose} resourceObjectsArr={ resourceObjectsArr}/>
 </ModalBody>
 
 
