@@ -3,56 +3,60 @@ import Home from '@/pages/index';
 import { UploadModal } from '../components/UploadModal';
 import { UploadForm } from '../components/UploadForm';
 
-//test Home page components
-describe('Home', () => {
+afterEach(() => {
+  cleanup();
+});
+
+const loadImages = jest.fn();
+const resourceObjectsArr: [] = [];
+
+
+test('homepage UI to render as expected', () => {
   // "render"
   render(<Home />);
-
-  afterEach(() => {
-    cleanup();
-  });
 
   // "arrange"
   const heading = screen.getByText('Image Viewer App');
   const uploadButton = screen.getByRole('button', { name: /upload/i });
-  const loadImages = jest.fn();
-  const resourceObjectsArr: any = [];
 
   // "assert"
-  test('initial UI is rendered as expected', () => {
-    expect(heading).toBeInTheDocument();
-    expect(uploadButton).toBeInTheDocument();
+  expect(heading).toBeInTheDocument();
+  expect(uploadButton).toBeInTheDocument();
+});
+
+
+test('UploadModal to render as expected', () => {
+  // "render"
+  render(
+    <UploadModal
+      loadImages={loadImages}
+      resourceObjectsArr={resourceObjectsArr}
+    />
+  );
+
+  // "arrange"
+  const button = screen.getByRole('button', {
+    name: /upload/i,
   });
 
-  test('UploadModal to render as expected', () => {
-    render(
-      <UploadModal
-        loadImages={loadImages}
-        resourceObjectsArr={resourceObjectsArr}
-      />
-    );
+  // "assert"
+  expect(button).toBeInTheDocument();
+});
 
-    const button = screen.getByRole('button', {
-      name: /upload/i,
-    });
 
-    expect(button).toBeInTheDocument();
+test('UploadForm to render as expected', () => {
+  // "render"
+  render(<UploadForm loadImages={loadImages} />);
 
-  });
+  // "arrange"
+  const titleLabel = screen.getByTestId('title-label');
+  const descriptionLabel = screen.getByTestId('description-label');
+  const titleInput = screen.getByPlaceholderText('Add a title here');
+  const descInput = screen.getByPlaceholderText('Add a description here');
 
-  test('UploadForm to render as expected', () => {
-    
-    render(<UploadForm loadImages={loadImages} />);
-
-    // "arrange"
-    const descriptionLabel = screen.getByTestId('description-label');
-    const titleInput = screen.getByPlaceholderText('Add a title here');
-    const descInput = screen.getByPlaceholderText('Add a description here');
-
-    expect(descriptionLabel).toBeInTheDocument();
-    expect(titleInput).toBeInTheDocument();
-    expect(descInput).toBeInTheDocument();
-
-  });
-
+  // "assert"
+  expect(titleLabel).toBeInTheDocument();
+  expect(descriptionLabel).toBeInTheDocument();
+  expect(titleInput).toBeInTheDocument();
+  expect(descInput).toBeInTheDocument();
 });

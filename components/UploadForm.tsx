@@ -131,7 +131,6 @@ export function UploadForm({loadImages, resourceObjectsArr, onClose}:Props) {
         <br />
 
         <label data-testid='title-label' htmlFor="title">Title</label>
-
         <Input
           id="title"
           name="title"
