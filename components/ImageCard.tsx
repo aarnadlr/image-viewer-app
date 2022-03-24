@@ -57,21 +57,23 @@ export default function ImageCard({
     public_id,
   },
 }: Props) {
+
   const handleDownloadClick = () => {
     const url = `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`;
     downloadImage(url, title);
   };
 
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isChecked, setIsChecked] = React.useState(true);
 
-  const handleChange = () => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     setIsChecked(!isChecked);
   };
 
   return (
     <Container>
 
-      <Checkbox isChecked={isChecked} onChange={handleChange} />
+      <Checkbox isChecked={isChecked} handleCheckboxChange={handleCheckboxChange} />
 
       <Image
         src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}

@@ -17,6 +17,8 @@ const FlexParent = styled.div`
 export default function Home() {
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]|null>(null);
 
+  const [checkedImages, setCheckedImages] = useState<string[]>([]);
+  
   const loadImages = async () => {
     try {
       const res = await fetch('/api/images');
