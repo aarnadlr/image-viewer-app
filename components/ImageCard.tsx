@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { Button } from '@chakra-ui/react';
@@ -13,6 +13,8 @@ type Props = {
     };
     public_id: string;
   };
+  setCheckedImagesArr: (checkedImagesArr: string[]) => void;
+  checkedImagesArr: string[];
 };
 
 const Container = styled.div`
@@ -56,6 +58,8 @@ export default function ImageCard({
     context: { title, description },
     public_id,
   },
+  setCheckedImagesArr,
+  checkedImagesArr,
 }: Props) {
 
   const handleDownloadClick = () => {
@@ -63,17 +67,21 @@ export default function ImageCard({
     downloadImage(url, title);
   };
 
-  const [isChecked, setIsChecked] = React.useState(true);
+  const [isChecked, setIsChecked] = React.useState(false);
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setIsChecked(!isChecked);
+    setIsChecked(e.target.checked);
+    // setIsChecked(!isChecked);
+
+    setCheckedImagesArr(isChecked ? checkedImagesArr.filter((image) => image !== public_id) : [...checkedImagesArr, public_id]);
   };
 
   return (
     <Container>
-
-      <Checkbox isChecked={isChecked} handleCheckboxChange={handleCheckboxChange} />
+      <Checkbox
+        isChecked={isChecked}
+        handleCheckboxChange={handleCheckboxChange}
+      />
 
       <Image
         src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}

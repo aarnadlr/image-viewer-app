@@ -15,9 +15,12 @@ const FlexParent = styled.div`
 `;
 
 export default function Home() {
+
+  // Image data from cloudinary
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]|null>(null);
 
-  const [checkedImages, setCheckedImages] = useState<string[]>([]);
+  // Array of checked images
+  const [checkedImagesArr, setCheckedImagesArr] = useState<string[]>([]);
   
   const loadImages = async () => {
     try {
@@ -35,6 +38,11 @@ export default function Home() {
     loadImages();
   }, []);
 
+  useEffect(() => {
+    console.log(checkedImagesArr);
+  }, [checkedImagesArr]);
+
+  
   return (
     <>
       <Head>
@@ -49,7 +57,7 @@ export default function Home() {
             resourceObjectsArr.map(
               (resourceObject: ResourceObjectInterface, index: number) => {
                 return (
-                  <ImageCard key={index} resourceObject={resourceObject} />
+                  <ImageCard key={index} resourceObject={resourceObject} setCheckedImagesArr={ setCheckedImagesArr} checkedImagesArr={checkedImagesArr} />
                 );
               }
             )
