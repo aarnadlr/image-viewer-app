@@ -37,7 +37,7 @@ exports[`renders homepage unchanged 1`] = `
       class="gallery css-rtde4j"
     >
       <p>
-        No images
+        Loading...
       </p>
     </div>
   </main>

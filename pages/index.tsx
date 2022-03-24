@@ -52,7 +52,7 @@ export default function Home() {
               }
             )
           ) : (
-            <p>No images</p>
+            <p>Loading...</p>
           )}
         </FlexParent>
       </main>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { Button } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
+import { Checkbox } from './Checkbox';
 
 type Props = {
   resourceObject: {
@@ -21,6 +22,7 @@ const Container = styled.div`
   width: 250px;
   flex-wrap: wrap;
   transition: all 0.2s ease-in-out;
+  position: relative;
 `;
 
 const Title = styled.h3`
@@ -32,8 +34,7 @@ const Title = styled.h3`
 
 const TextContainer = styled.div`
   margin: 0.5rem 0 0 0;
-  padding: 0 .5rem .5rem .5rem;
-
+  padding: 0 0.5rem 0.5rem 0.5rem;
 `;
 
 const downloadImage = async (url: string, title: string) => {
@@ -56,31 +57,36 @@ export default function ImageCard({
     public_id,
   },
 }: Props) {
-
   const handleDownloadClick = () => {
     const url = `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`;
     downloadImage(url, title);
   };
 
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <Container>
-        <Image
-          src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}
-          width="250"
-          height="250"
-          alt="gallery image"
-          priority
-          className='card-img'
-          // layout="responsive"
-          // layout="fill"
-          objectFit="cover"
+
+      <Checkbox isChecked={isChecked} onChange={handleChange} />
+
+      <Image
+        src={`http://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`}
+        width="250"
+        height="250"
+        alt="gallery image"
+        priority
+        className="card-img"
+        objectFit="cover"
       />
-      
+
       <TextContainer>
-        
         <Title data-testid="title">{title}</Title>
         <p data-testid="description">{description}</p>
-  
+
         <Button
           data-testid="download-button"
           leftIcon={<DownloadIcon />}
@@ -88,14 +94,12 @@ export default function ImageCard({
           size="xs"
           colorScheme="gray"
           variant="outline"
-          width='100px'
-          margin='1rem 0 0 0'
+          width="100px"
+          margin="1rem 0 0 0"
         >
           Download
         </Button>
       </TextContainer>
-
-
     </Container>
   );
 }
