@@ -4,15 +4,13 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
-  // FormControl,
-  // FormLabel,
-  // Input,
   useDisclosure,
+  useBreakpointValue,
 } from '@chakra-ui/react';
+
 import { UploadForm } from './UploadForm';
 
 type Props = {
@@ -23,17 +21,15 @@ type Props = {
 export function UploadModal({ loadImages, resourceObjectsArr }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const buttonSize = useBreakpointValue({ base: 'sm', md: 'lg' });
+
   return (
     <>
-      <Button onClick={onOpen} size="lg" colorScheme={'purple'}>
+      <Button onClick={onOpen} size={buttonSize} colorScheme={'purple'}>
         Upload
       </Button>
 
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        isCentered
-      >
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay backdropBlur="6px" />
 
         <ModalContent>
