@@ -3,8 +3,6 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Header } from '../components/Header';
-import { zipFiles } from '../utils/zipFiles';
-import { Button, Heading } from '@chakra-ui/react';
 
 import { DownloadIcon } from '@chakra-ui/icons';
 interface ResourceObjectInterface {
@@ -21,7 +19,7 @@ export default function Home() {
   // Image data from cloudinary
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[] | null>(null);
 
-  // Array of checked images
+  // Array of checked image objects
   const [checkedImagesArr, setCheckedImagesArr] = useState<{}[]>([]);
 
   const loadImages = async () => {
@@ -39,13 +37,7 @@ export default function Home() {
     loadImages();
   }, []);
 
-  useEffect(() => {
-    console.log(checkedImagesArr);
-  }, [checkedImagesArr]);
 
-  const handleZipFiles = () => {
-    zipFiles(checkedImagesArr);
-  };
 
   return (
     <>
@@ -58,21 +50,8 @@ export default function Home() {
         <Header
           resourceObjectsArr={resourceObjectsArr}
           loadImages={loadImages}
+          checkedImagesArr={checkedImagesArr}
         />
-
-        {
-          <Button
-            data-testid="download-button"
-            leftIcon={<DownloadIcon />}
-            onClick={handleZipFiles}
-            size="md"
-            colorScheme="gray"
-            margin="0 0 1rem 0"
-            disabled={checkedImagesArr.length > 0 ? false : true}
-          >
-            Download Selected Files
-          </Button>
-        }
 
         <FlexParent className="gallery">
           {resourceObjectsArr ? (

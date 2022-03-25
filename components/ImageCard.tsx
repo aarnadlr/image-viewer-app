@@ -85,6 +85,8 @@ export default function ImageCard({
 
   };
 
+
+
   return (
     <Container>
       <Checkbox
