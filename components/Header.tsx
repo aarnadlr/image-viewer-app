@@ -14,9 +14,14 @@ export function Header({loadImages, resourceObjectsArr
     <nav style={{marginBottom: '40px'}}>
       <Flex>
         <Box>
-          <Heading size="lg" color={'purple.500'}>
+          <Heading size="lg" color={'purple.500'} marginBottom={'.5rem'}>
             Image Viewer App
           </Heading>
+
+          <Heading size="sm" color={'purple.500'} fontWeight={500}>
+            Select images to download
+          </Heading>
+
         </Box>
         <Spacer />
 
