@@ -79,8 +79,8 @@ export default function ImageCard({
 
     setCheckedImagesArr(
       isChecked
-        ? checkedImagesArr.filter((imageObj) => imageObj[title] !== public_id )
-        : [...checkedImagesArr, { [title]: public_id }]  
+        ? checkedImagesArr.filter((imageObj) => imageObj.title !== title )
+        : [...checkedImagesArr, { title, public_id, url: `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg` }]  
     );
 
   };
