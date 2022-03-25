@@ -20,7 +20,7 @@ export default function Home() {
   const [resourceObjectsArr, setResourceObjectsArr] = useState<[]|null>(null);
 
   // Array of checked images
-  const [checkedImagesArr, setCheckedImagesArr] = useState<string[]>([]);
+  const [checkedImagesArr, setCheckedImagesArr] = useState<{}[]>([]);
   
   const loadImages = async () => {
     try {
@@ -42,7 +42,7 @@ export default function Home() {
     console.log(checkedImagesArr);
   }, [checkedImagesArr]);
 
-  
+
   return (
     <>
       <Head>
