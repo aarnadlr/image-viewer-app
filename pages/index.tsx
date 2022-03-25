@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Header } from '../components/Header';
-
+import {zipFiles} from '../utils/zipFiles'
 interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
@@ -42,6 +42,10 @@ export default function Home() {
     console.log(checkedImagesArr);
   }, [checkedImagesArr]);
 
+  const handleZipFiles = () => {
+    const zip = zipFiles(checkedImagesArr);
+    console.log('handleZipFiles: zip:', zip);
+  }
 
   return (
     <>
@@ -52,6 +56,8 @@ export default function Home() {
 
       <main>
         <Header resourceObjectsArr={resourceObjectsArr} loadImages={loadImages} />
+
+        <button onClick={handleZipFiles}>zip demo file</button>
         <FlexParent className="gallery">
           {resourceObjectsArr ? (
             resourceObjectsArr.map(
