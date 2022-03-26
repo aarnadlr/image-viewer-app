@@ -3,8 +3,8 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Header } from '../components/Header';
-
-import { DownloadIcon } from '@chakra-ui/icons';
+import { Oval } from 'react-loader-spinner';
+import { Flex } from '@chakra-ui/react';
 interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
@@ -37,8 +37,6 @@ export default function Home() {
     loadImages();
   }, []);
 
-
-
   return (
     <>
       <Head>
@@ -53,24 +51,37 @@ export default function Home() {
           checkedImagesArr={checkedImagesArr}
         />
 
-        <FlexParent className="gallery">
-          {resourceObjectsArr ? (
-            resourceObjectsArr.map(
-              (resourceObject: ResourceObjectInterface, index: number) => {
-                return (
-                  <ImageCard
-                    key={index}
-                    resourceObject={resourceObject}
-                    setCheckedImagesArr={setCheckedImagesArr}
-                    checkedImagesArr={checkedImagesArr}
-                  />
-                );
-              }
-            )
-          ) : (
-            <p>Loading...</p>
-          )}
-        </FlexParent>
+        {resourceObjectsArr ? (
+          <FlexParent className="gallery">
+            {resourceObjectsArr ? (
+              resourceObjectsArr.map(
+                (resourceObject: ResourceObjectInterface, index: number) => {
+                  return (
+                    <ImageCard
+                      key={index}
+                      resourceObject={resourceObject}
+                      setCheckedImagesArr={setCheckedImagesArr}
+                      checkedImagesArr={checkedImagesArr}
+                    />
+                  );
+                }
+              )
+            ) : (
+              <p>No images yet.</p>
+            )}
+          </FlexParent>
+        ) : (
+          <Flex justify='center'>
+              <Oval
+                ariaLabel="loading-indicator"
+                height={80}
+                width={80}
+                strokeWidth={3}
+                color="#d6bcfa"
+                secondaryColor="gray"
+              />
+          </Flex>
+        )}
       </main>
     </>
   );
