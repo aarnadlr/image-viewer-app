@@ -1,6 +1,6 @@
 html,
 body {
-  padding: 8px;
+  padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -14,6 +14,7 @@ body {
   visibility: hidden;
 }
 .custom-file-input::before {
+  color: rgb(62, 62, 62);
   content: 'Browse files';
   display: inline-block;
   background: #edf2f7;

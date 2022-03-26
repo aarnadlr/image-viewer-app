@@ -2,7 +2,9 @@ import ImageCard from '@/components/ImageCard';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-// import { useRouter } from 'next/router';
+import { Header } from '../components/Header';
+
+import { DownloadIcon } from '@chakra-ui/icons';
 interface ResourceObjectInterface {
   context: { title: string; description: string };
   public_id: string;
@@ -12,9 +14,13 @@ const FlexParent = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
+
 export default function Home() {
-  // const router = useRouter();
-  const [resourceObjectsArr, setResourceObjectsArr] = useState<[]>();
+  // Image data from cloudinary
+  const [resourceObjectsArr, setResourceObjectsArr] = useState<[] | null>(null);
+
+  // Array of checked image objects
+  const [checkedImagesArr, setCheckedImagesArr] = useState<{}[]>([]);
 
   const loadImages = async () => {
     try {
@@ -26,32 +32,46 @@ export default function Home() {
     }
   };
 
+  // fetch images on mount
   useEffect(() => {
     loadImages();
   }, []);
 
+
+
   return (
-    <div>
+    <>
       <Head>
         <title>Image Viewer App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
+        <Header
+          resourceObjectsArr={resourceObjectsArr}
+          loadImages={loadImages}
+          checkedImagesArr={checkedImagesArr}
+        />
+
         <FlexParent className="gallery">
           {resourceObjectsArr ? (
             resourceObjectsArr.map(
               (resourceObject: ResourceObjectInterface, index: number) => {
                 return (
-                  <ImageCard key={index} resourceObject={resourceObject} />
+                  <ImageCard
+                    key={index}
+                    resourceObject={resourceObject}
+                    setCheckedImagesArr={setCheckedImagesArr}
+                    checkedImagesArr={checkedImagesArr}
+                  />
                 );
               }
             )
           ) : (
-            <p>No images</p>
-          )}</FlexParent>
+            <p>Loading...</p>
+          )}
+        </FlexParent>
       </main>
-      <footer></footer>
-    </div>
+    </>
   );
 }
