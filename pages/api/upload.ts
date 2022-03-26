@@ -18,7 +18,7 @@ const upload = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     );
 
-    console.log('uploadResponse:', uploadResponse);
+    // console.log('uploadResponse:', uploadResponse);
 
     res.json({ msg: 'success' });
   } catch (err) {

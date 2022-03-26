@@ -3,70 +3,155 @@
 exports[`renders homepage unchanged 1`] = `
 <div>
   <main>
-    <nav
-      style="margin-bottom: 40px;"
+    <div
+      class="css-1ifgz5v"
     >
       <div
-        class="css-k008qs"
+        class="css-0"
       >
-        <div
-          class="css-0"
+        <h2
+          class="chakra-heading css-6hjdq6"
         >
-          <h2
-            class="chakra-heading css-116cak5"
-          >
-            Image Viewer App
-          </h2>
-          <h2
-            class="chakra-heading css-l3f0hq"
-          >
-            Select images to download
-          </h2>
-        </div>
-        <div
-          class="css-17xejub"
-        />
-        <div
-          class="css-70qvj9"
+          Image Viewer App
+        </h2>
+        <h2
+          class="chakra-heading css-1468sq2"
         >
-          <button
-            class="chakra-button css-h9nxyl"
-            data-testid="download-button"
-            disabled=""
-            type="button"
-          >
-            <span
-              class="chakra-button__icon css-1wh2kri"
-            >
-              <svg
-                aria-hidden="true"
-                class="chakra-icon css-onkibi"
-                focusable="false"
-                viewBox="0 0 14 14"
-              >
-                <path
-                  d="M11.2857,6.05714 L10.08571,4.85714 L7.85714,7.14786 L7.85714,1 L6.14286,1 L6.14286,7.14786 L3.91429,4.85714 L2.71429,6.05714 L7,10.42857 L11.2857,6.05714 Z M1,11.2857 L1,13 L13,13 L13,11.2857 L1,11.2857 Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-            Download Selected Files
-          </button>
-          <button
-            class="chakra-button css-5c2176"
-            type="button"
-          >
-            Upload
-          </button>
-        </div>
+          Select images to download
+        </h2>
       </div>
-    </nav>
+      <div
+        class="css-70qvj9"
+      >
+        <button
+          class="chakra-button css-fb5mw8"
+          data-testid="download-button"
+          disabled=""
+          type="button"
+        >
+          <span
+            class="chakra-button__icon css-1wh2kri"
+          >
+            <svg
+              aria-hidden="true"
+              class="chakra-icon css-onkibi"
+              focusable="false"
+              viewBox="0 0 14 14"
+            >
+              <path
+                d="M11.2857,6.05714 L10.08571,4.85714 L7.85714,7.14786 L7.85714,1 L6.14286,1 L6.14286,7.14786 L3.91429,4.85714 L2.71429,6.05714 L7,10.42857 L11.2857,6.05714 Z M1,11.2857 L1,13 L13,13 L13,11.2857 L1,11.2857 Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          Download Selected Files
+        </button>
+        <button
+          class="chakra-button css-5c2176"
+          type="button"
+        >
+          Upload
+        </button>
+        <button
+          aria-label="color mode"
+          class="chakra-button css-es8zz4"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="chakra-icon css-onkibi"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+              />
+              <path
+                d="M12 1v2"
+              />
+              <path
+                d="M12 21v2"
+              />
+              <path
+                d="M4.22 4.22l1.42 1.42"
+              />
+              <path
+                d="M18.36 18.36l1.42 1.42"
+              />
+              <path
+                d="M1 12h2"
+              />
+              <path
+                d="M21 12h2"
+              />
+              <path
+                d="M4.22 19.78l1.42-1.42"
+              />
+              <path
+                d="M18.36 5.64l1.42-1.42"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
     <div
-      class="gallery css-rtde4j"
+      class="css-1l4w6pd"
     >
-      <p>
-        Loading...
-      </p>
+      <div
+        data-testid="oval-loading"
+        style="display: flex; padding: 3px;"
+      >
+        <svg
+          aria-label="loading-indicator"
+          data-testid="oval-svg"
+          height="80"
+          stroke="#d6bcfa"
+          viewBox="-20.5 -20.5 43 43"
+          width="80"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <g
+              stroke-width="3"
+              transform="translate(1 1)"
+            >
+              <circle
+                cx="0"
+                cy="0"
+                r="20"
+                stroke="gray"
+                stroke-opacity=".5"
+                stroke-width="3"
+              />
+              <path
+                d="M20 0c0-9.94-8.06-20-20-20"
+              >
+                <animatetransform
+                  attributeName="transform"
+                  dur="1s"
+                  from="0 0 0"
+                  repeatCount="indefinite"
+                  to="360 0 0"
+                  type="rotate"
+                />
+              </path>
+            </g>
+          </g>
+        </svg>
+      </div>
     </div>
   </main>
 </div>
