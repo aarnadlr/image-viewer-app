@@ -14,6 +14,7 @@ body {
   visibility: hidden;
 }
 .custom-file-input::before {
+  color: rgb(62, 62, 62);
   content: 'Browse files';
   display: inline-block;
   background: #edf2f7;

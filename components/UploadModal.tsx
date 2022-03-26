@@ -9,6 +9,7 @@ import {
   Button,
   useDisclosure,
   useBreakpointValue,
+  useColorModeValue
 } from '@chakra-ui/react';
 
 import { UploadForm } from './UploadForm';
@@ -22,6 +23,7 @@ export function UploadModal({ loadImages, resourceObjectsArr }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const buttonSize = useBreakpointValue({ base: 'sm', md: 'lg' });
+  const color = useColorModeValue('purple.500', 'purple.200');
 
   return (
     <>
@@ -33,7 +35,7 @@ export function UploadModal({ loadImages, resourceObjectsArr }: Props) {
         <ModalOverlay backdropBlur="6px" />
 
         <ModalContent>
-          <ModalHeader color={'purple.500'}>Upload an Image</ModalHeader>
+          <ModalHeader color={color}>Upload an Image</ModalHeader>
 
           <ModalCloseButton data-testid="ModalCloseButton" />
 
