@@ -42,8 +42,6 @@ export function UploadModal({ loadImages, resourceObjectsArr }: Props) {
           <ModalBody pb={6}>
             <UploadForm
               loadImages={loadImages}
-              onClose={onClose}
-              resourceObjectsArr={resourceObjectsArr}
             />
           </ModalBody>
         </ModalContent>
