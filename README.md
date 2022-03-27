@@ -9,8 +9,11 @@
 
 ## About Image-viewer-app:
 - **Front-end:** TypeScript React / NextJS
-- **Back-end:** Docker container on Google Cloud Run (NodeJS)
+- **Back-end:** Vercel serverless functions (NodeJS)
 - **Database:** Cloudinary
+- **Deployment:** Docker container on Google Cloud Run (NodeJS)
+---
+## App Features:
 - User may download individual images
 - User may select multiple images to download a bundled .zip file
 - Unit tests with Jest / React Testing Library
