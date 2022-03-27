@@ -30,8 +30,6 @@
 2. Build container: `docker build -t image-viewer-app .` .
 3. Run container: `docker run -p 3000:3000 image-viewer-app` .
 
-View your images created with `docker images`.
-
 ---
 
 ## To Run Locally in Node:
@@ -39,8 +37,6 @@ View your images created with `docker images`.
 First, run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
@@ -51,5 +47,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## To run Jest Tests
 
 ```bash
-npm test
+yarn test
 ```
