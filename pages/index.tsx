@@ -44,7 +44,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <div className="home__container" role="application">
         <Header
           resourceObjectsArr={resourceObjectsArr}
           loadImages={loadImages}
@@ -52,7 +52,7 @@ export default function Home() {
         />
 
         {resourceObjectsArr ? (
-          <FlexParent className="gallery">
+          <FlexParent data-testid="flex-parent" className="gallery">
             {resourceObjectsArr ? (
               resourceObjectsArr.map(
                 (resourceObject: ResourceObjectInterface, index: number) => {
@@ -67,22 +67,22 @@ export default function Home() {
                 }
               )
             ) : (
-              <p>No images yet.</p>
+              <p data-testid="no-images">No images yet.</p>
             )}
           </FlexParent>
         ) : (
-          <Flex justify='center'>
-              <Oval
-                ariaLabel="loading-indicator"
-                height={80}
-                width={80}
-                strokeWidth={3}
-                color="#d6bcfa"
-                secondaryColor="gray"
-              />
+          <Flex justify="center">
+            <Oval
+              ariaLabel="loading-indicator"
+              height={80}
+              width={80}
+              strokeWidth={3}
+              color="#d6bcfa"
+              secondaryColor="gray"
+            />
           </Flex>
         )}
-      </main>
+      </div>
     </>
   );
 }

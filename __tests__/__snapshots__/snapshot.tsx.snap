@@ -2,7 +2,10 @@
 
 exports[`renders homepage unchanged 1`] = `
 <div>
-  <main>
+  <div
+    class="home__container"
+    role="application"
+  >
     <div
       class="css-1ifgz5v"
     >
@@ -11,11 +14,13 @@ exports[`renders homepage unchanged 1`] = `
       >
         <h2
           class="chakra-heading css-6hjdq6"
+          data-testid="heading"
         >
           Image Viewer App
         </h2>
         <h2
           class="chakra-heading css-1468sq2"
+          data-testid="subheading"
         >
           Select images to download
         </h2>
@@ -55,6 +60,7 @@ exports[`renders homepage unchanged 1`] = `
         <button
           aria-label="color mode"
           class="chakra-button css-es8zz4"
+          data-testid="icon-button"
           type="button"
         >
           <svg
@@ -153,6 +159,6 @@ exports[`renders homepage unchanged 1`] = `
         </svg>
       </div>
     </div>
-  </main>
+  </div>
 </div>
 `;

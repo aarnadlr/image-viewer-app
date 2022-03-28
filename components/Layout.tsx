@@ -4,8 +4,8 @@ interface Props {
 }
 export default function Layout({ children }: Props) {
   return (
-    <div style={{padding:'16px'}}>
-      <main>{children}</main>
-    </div>
+    <main style={{padding:'16px'}}>
+      {children}
+    </main>
   );
 }
