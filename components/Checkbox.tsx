@@ -16,5 +16,12 @@ type Props = {
 };
 
 export function Checkbox({ isChecked, handleCheckboxChange }: Props) {
-  return <Input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />;
+  return (
+    <Input
+      type="checkbox"
+      role="checkbox"
+      checked={isChecked}
+      onChange={handleCheckboxChange}
+    />
+  );
 }
