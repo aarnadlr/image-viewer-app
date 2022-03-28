@@ -49,6 +49,7 @@ export function Header({
           lineHeight={1.2}
           color={color}
           marginBottom={'.5rem'}
+          data-testid="heading"
         >
           Image Viewer App
         </Heading>
@@ -59,6 +60,7 @@ export function Header({
           lineHeight={1.2}
           color={color}
           fontWeight={500}
+          data-testid="subheading"
         >
           Select images to download
         </Heading>
@@ -83,6 +85,7 @@ export function Header({
         />
 
         <IconButton
+          data-testid="icon-button"
           margin="0 0 0 .5rem"
           size={buttonSize}
           onClick={toggleColorMode}

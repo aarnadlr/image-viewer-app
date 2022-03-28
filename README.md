@@ -1,23 +1,51 @@
-# Next.js + Jest
+# Image-viewer-app:
+# Pinterest-inspired React app running with Docker on Google Cloud Run
 
-This example shows how to configure Jest to work with Next.js.
+## Live deployment: https://hello2-p5g4ghuiha-pd.a.run.app/
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
 
-## How to Use
+---
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
 
-In your terminal, run the following command:
+## About Image-viewer-app:
+- **Front-end:** TypeScript React / NextJS
+- **Back-end:** Vercel serverless functions (NodeJS)
+- **Database:** Cloudinary
+- **Deployment:** Docker container on Google Cloud Run (NodeJS)
+---
+## App Features:
+- User may download individual images
+- User may select multiple images to download a bundled .zip file
+- Unit tests with Jest / React Testing Library
+- Fully responsive UI
+- Light/dark modes
+- Lazy loading images
+
+
+---
+## To run with Docker:
+
+
+1. Install Docker on your machine.
+2. Build container: `docker build -t image-viewer-app .` .
+3. Run container: `docker run -p 3000:3000 image-viewer-app` .
+
+---
+
+## To Run Locally in Node:
+
+First, run the development server:
 
 ```bash
-npx create-next-app --example with-jest with-jest-app
-# or
-yarn create next-app --example with-jest with-jest-app
+yarn dev
 ```
 
-## Run Jest Tests
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+---
+## To run Jest Tests
 
 ```bash
-npm test
+yarn test
 ```

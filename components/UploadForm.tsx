@@ -65,8 +65,6 @@ export function UploadForm({ loadImages }: Props) {
     };
   };
 
-  const reload = router?.reload as any;
-
   const uploadImageAndMetadata = async (
     base64EncodedImage: string,
     title: string,
@@ -85,7 +83,7 @@ export function UploadForm({ loadImages }: Props) {
         loadImages();
 
         setTimeout(() => {
-          reload(window.location.pathname);
+          router.reload();
         }, 2000);
       }
     } catch (err) {

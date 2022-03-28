@@ -7,18 +7,16 @@ const upload = async (req: NextApiRequest, res: NextApiResponse) => {
     const title = req.body.title;
     const description = req.body.description;
 
-    const uploadResponse = await cloudinary.uploader.upload(
+    await cloudinary.uploader.upload(
       fileStr,
       {
           upload_preset: 'ml_default',
           context: `title=${title}|description=${description}`
       },
-      function (error: any, result: any) {
-        console.log(result, error);
+      function (error: {}, result: {}) {
+        console.log(error, result);
       }
     );
-
-    // console.log('uploadResponse:', uploadResponse);
 
     res.json({ msg: 'success' });
   } catch (err) {
