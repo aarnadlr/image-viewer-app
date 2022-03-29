@@ -73,19 +73,22 @@ export default function ImageCard({
   const [isChecked, setIsChecked] = React.useState(false);
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     // setIsChecked(e.target.checked);
     setIsChecked(!isChecked);
 
     setCheckedImagesArr(
       isChecked
-        ? checkedImagesArr.filter((imageObj) => imageObj.title !== title )
-        : [...checkedImagesArr, { title, public_id, url: `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg` }]  
+        ? checkedImagesArr.filter((imageObj) => imageObj.title !== title)
+        : [
+            ...checkedImagesArr,
+            {
+              title,
+              public_id,
+              url: `https://res.cloudinary.com/aarncloud/image/upload/v1598424868/${public_id}.jpg`,
+            },
+          ]
     );
-
   };
-
-
 
   return (
     <Container>
